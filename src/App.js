@@ -1,22 +1,32 @@
 import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { createTodos } from "./redux/modules/Todos";
 
 function App() {
   const [title, setTitle] = useState("");
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: "연습중..",
-    },
-  ]);
+  const todos = useSelector((state) => {
+    console.log(state);
+    return state.todos;
+  });
+
+  const dispatch = useDispatch();
   const newId = useRef(2);
+
   const onChangeHandler = (e) => {
     setTitle(e.target.value);
   };
 
   const onClickHandler = () => {
     if (!title) return;
-    setTodos([...todos, { id: (newId.current += 1), title: title }]);
+
+    dispatch(
+      createTodos({
+        id: (newId.current += 1),
+        title,
+      })
+    );
+
     setTitle("");
   };
 
