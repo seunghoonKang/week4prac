@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { createTodos } from "./redux/modules/Todos";
 
+//initialState와 reducer를 개선하며, useSelector도 변경되어야 한다.
+//기존에는 state.todos로 가져올 수 있었지만
+//initialState에서 다시 한 번 todos로 묶었기에
+//state.todos.todos로 불러야 한다.
 function App() {
   const [title, setTitle] = useState("");
   const todos = useSelector((state) => {
     console.log(state.todos);
-    return state.todos;
+    return state.todos.todos;
   });
 
   const dispatch = useDispatch();
