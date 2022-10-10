@@ -6,7 +6,7 @@ import { createTodos } from "./redux/modules/Todos";
 function App() {
   const [title, setTitle] = useState("");
   const todos = useSelector((state) => {
-    console.log(state);
+    console.log(state.todos);
     return state.todos;
   });
 
